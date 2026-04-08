@@ -1,0 +1,298 @@
+/* ═══════════════════════════════════════════
+   ESS — You Are Here
+   Minimal / space-inspired dark UI
+   ═══════════════════════════════════════════ */
+
+:root {
+  --bg: #1a1a1a;
+  --bg-surface: #222222;
+  --text: #e0e0e0;
+  --text-muted: #888888;
+  --accent: #ffffff;
+  --border: #333333;
+  --font-mono: 'Space Mono', 'SF Mono', 'Fira Code', monospace;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+}
+
+/* ── HEADER SECTION ── */
+
+#header-section {
+  padding: 60px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.header-canvas-wrap {
+  width: 280px;
+  height: 280px;
+  flex-shrink: 0;
+}
+
+.header-canvas-wrap canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.header-info {
+  flex: 1;
+}
+
+.header-title {
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.3;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+.header-coords {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 16px;
+}
+
+.header-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.coord-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.coord-label {
+  color: var(--text-muted);
+  min-width: 42px;
+}
+
+.coord-value {
+  color: var(--text);
+  font-weight: 400;
+}
+
+.header-breadcrumb {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
+/* ── LOCATIONS SECTION ── */
+
+#locations-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 40px 80px;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+/* ── Location item ── */
+
+.loc-item {
+  border-top: 1px solid var(--border);
+}
+
+.loc-item:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.loc-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 2.8rem;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  text-align: left;
+  transition: opacity 0.2s;
+}
+
+.loc-header:hover {
+  opacity: 0.7;
+}
+
+.loc-chevron {
+  color: var(--text-muted);
+  transition: transform 0.35s ease;
+  flex-shrink: 0;
+}
+
+.loc-item.is-open .loc-chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Expanded detail ── */
+
+.loc-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loc-item.is-open .loc-detail {
+  max-height: 400px;
+}
+
+.loc-detail-inner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 0 36px;
+}
+
+.loc-canvas-wrap {
+  width: 180px;
+  height: 180px;
+  flex-shrink: 0;
+}
+
+.loc-canvas-wrap canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.loc-info {
+  flex: 1;
+}
+
+.loc-breadcrumb {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.loc-coords {
+  display: flex;
+  gap: 40px;
+}
+
+.loc-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.loc-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.loc-label {
+  color: var(--text-muted);
+  min-width: 38px;
+}
+
+.loc-value {
+  color: var(--text);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 720px) {
+  #header-section {
+    padding: 40px 20px;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+  }
+
+  .header-canvas-wrap {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+
+  .header-info {
+    width: 100%;
+  }
+
+  .header-coords {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #locations-section {
+    padding: 20px 20px 60px;
+  }
+
+  .loc-header {
+    font-size: 1.8rem;
+    padding: 20px 0;
+  }
+
+  .loc-detail-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .loc-canvas-wrap {
+    width: 140px;
+    height: 140px;
+  }
+
+  .loc-coords {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

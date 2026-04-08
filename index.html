@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ESS — You Are Here</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- ═══ HEADER SECTION ═══ -->
+    <section id="header-section">
+      <div class="header-inner">
+        <div class="header-canvas-wrap" id="header-canvas"></div>
+        <div class="header-info">
+          <h1 class="header-title">YOU ARE<br>HERE</h1>
+          <div class="header-coords">
+            <div class="header-col">
+              <div class="coord-row"><span class="coord-label">Dec</span> <span class="coord-value" id="header-dec">—</span></div>
+              <div class="coord-row"><span class="coord-label">AR</span> <span class="coord-value" id="header-ar">—</span></div>
+            </div>
+            <div class="header-col">
+              <div class="coord-row"><span class="coord-label">Lat</span> <span class="coord-value" id="header-lat">—</span></div>
+              <div class="coord-row"><span class="coord-label">Long</span> <span class="coord-value" id="header-lng">—</span></div>
+            </div>
+          </div>
+          <span class="header-breadcrumb" id="header-breadcrumb"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MORE LOCATIONS ═══ -->
+    <section id="locations-section">
+      <div class="section-label">02. MORE LOCATIONS</div>
+      <div id="locations-list"></div>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
