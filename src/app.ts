@@ -1,9 +1,9 @@
 import { initScene, type SceneContext } from './three/scene';
 import { latLngToRotation } from './geo/geoToRotation';
-import { userLocation, presetLocations } from './geo/geoConfig';
+import { fetchUserLocation, presetLocations } from './geo/geoConfig';
 import { updateHeaderInfo } from './ui/headerInfo';
 import { renderLocationsList } from './ui/locationsList';
-import { initState, getState, setState, subscribe } from './ui/state';
+import { initState, setState, subscribe } from './ui/state';
 import type { GeoLocation } from './geo/geoTypes';
 
 /** Set to true to enable OrbitControls for debugging the 3D view */
@@ -15,6 +15,9 @@ let headerScene: SceneContext;
 const locationScenes = new Map<number, SceneContext>();
 
 export async function startApp(): Promise<void> {
+  // ── Detect user location by IP (real API call) ──
+  const userLocation = await fetchUserLocation();
+
   // ── State ──
   initState(userLocation);
 

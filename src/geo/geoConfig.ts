@@ -1,22 +1,51 @@
 import type { GeoLocation } from './geoTypes';
 
-/**
- * Simulated user location obtained via IP geolocation.
- *
- * TODO: Replace this mock with a real Geo-IP service call.
- * Integration point: fetch from an API like ipapi.co, ipinfo.io,
- * or a server-side endpoint, then map the response to GeoLocation.
- */
-export const userLocation: GeoLocation = {
-  name: 'Cuenca',
-  breadcrumb: 'CUENCA / ECUADOR / SOUTH AMERICA',
-  country: 'Ecuador',
-  countryCode: 'EC',
-  lat: -2.9006,
-  lng: -79.0045,
+/** Fallback location if IP geolocation fails */
+const fallbackLocation: GeoLocation = {
+  name: 'New York',
+  breadcrumb: 'NEW YORK / USA / NORTH AMERICA',
+  country: 'United States',
+  countryCode: 'US',
+  lat: 40.7128,
+  lng: -74.006,
   precision: 'approximate',
   source: 'ip',
 };
+
+/**
+ * Detect user location via IP using ip-api.com (free, no API key required).
+ * Returns a GeoLocation based on the visitor's public IP.
+ */
+export async function fetchUserLocation(): Promise<GeoLocation> {
+  try {
+    const res = await fetch('http://ip-api.com/json/?fields=status,country,countryCode,regionName,city,lat,lon');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = await res.json();
+    if (data.status !== 'success') throw new Error('IP lookup failed');
+
+    const city = data.city || data.regionName || data.country;
+    const region = data.regionName || '';
+    const country = data.country || '';
+
+    return {
+      name: city,
+      breadcrumb: [city, region, country]
+        .filter(Boolean)
+        .map((s: string) => s.toUpperCase())
+        .join(' / '),
+      country,
+      countryCode: data.countryCode || '??',
+      lat: data.lat,
+      lng: data.lon,
+      precision: 'approximate',
+      source: 'ip',
+    };
+  } catch (err) {
+    console.warn('IP geolocation failed, using fallback:', err);
+    return fallbackLocation;
+  }
+}
 
 /** Predefined "More Locations" entries */
 export const presetLocations: GeoLocation[] = [
